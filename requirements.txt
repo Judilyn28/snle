@@ -2,6 +2,6 @@ Graph Construction
 Shortest Path Routing
 Cycle Detection
 Priority Dispatch Queue
-Depot Lookup (Hash Map)
-Route Prefix Search (Trie)
+Depot Lookup - Hash Map
+Route Prefix Search - Trie
 Bonus Features
