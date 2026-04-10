@@ -5,23 +5,6 @@
 ## Overview
 SNLE is a command-line logistics simulator that models a city delivery network as a weighted, directed graph. It combines core COMP 251 topics into one project, including graph algorithms, custom heaps, hashing, tries, memoization, and unit testing.
 
-## Repository Structure
-```text
-snle/
-├── src/
-│   ├── main.py
-│   ├── graph.py
-│   ├── heap.py
-│   ├── hashmap.py
-│   ├── trie.py
-│   └── utils.py
-├── data/
-│   └── network.txt
-├── tests/
-├── README.md
-└── requirements.txt
-```
-
 ## Features
 - Directed weighted graph using an adjacency list
 - Dijkstra's algorithm with a custom `MinHeap`
@@ -33,25 +16,6 @@ snle/
 - Minimum spanning forest of the undirected graph projection
 - Memoized all-pairs shortest paths using dynamic programming
 - ASCII graph view and matplotlib visualization
-
-## Input File Format
-```text
-NODES
-DepotA DepotB DepotC WarehouseX ZoneNorth ZoneSouth
-
-EDGES
-DepotA DepotB 4
-DepotA WarehouseX 2
-DepotB ZoneNorth 5
-WarehouseX ZoneSouth 3
-ZoneSouth DepotC 1
-DepotC ZoneNorth 2
-
-PACKAGES
-PKG001 8 ZoneNorth 2.5
-PKG002 5 ZoneSouth 10.0
-PKG003 10 DepotC 0.8
-```
 
 ## How to Run
 From the project root:
@@ -89,6 +53,3 @@ python -m unittest discover -s tests -v
 - Kruskal MST on the undirected projection: `O(E log E)`
 - Memoized all-pairs shortest paths: `O(V^3)` time and `O(V^3)` space
 
-## Notes
-- `tests/` is optional in the original structure, but included here for grading support.
-- The project uses only custom heap and hash-table implementations for the required algorithms and lookups.
