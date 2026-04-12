@@ -56,21 +56,20 @@ PKG003 10 DepotC 0.8
 """.strip()
 
 
-# 1) Graph Theory & Representations
-# 2) Algorithm Analysis & Complexity Theory (behavior-oriented verification)
+# 1) Algorithm Analysis & Complexity Theory (behavior-oriented verification)
 def test_graph_summary_counts_nodes_edges_and_components(sample_graph: Graph) -> None:
     summary = sample_graph.graph_summary()
     assert summary == {'nodes': 6, 'edges': 6, 'connected_components': 1}
 
 
-# 3) Priority Structures & Weighted Graphs
+# 2) Priority Structures & Weighted Graphs
 def test_dijkstra_returns_expected_shortest_path(sample_graph: Graph) -> None:
     distance, path = sample_graph.dijkstra('DepotA', 'ZoneNorth')
     assert distance == 8.0
     assert path == ['DepotA', 'WarehouseX', 'ZoneSouth', 'DepotC', 'ZoneNorth']
 
 
-# 4) Weighted Graphs / Bellman-Ford
+# 3) Weighted Graphs / Bellman-Ford
 def test_bellman_ford_handles_negative_edge_without_negative_cycle() -> None:
     graph = Graph()
     graph.add_edge('A', 'B', 4)
@@ -82,7 +81,7 @@ def test_bellman_ford_handles_negative_edge_without_negative_cycle() -> None:
     assert path == ['A', 'B', 'C', 'D']
 
 
-# 5) Graph Theory / Cycle Detection
+# 4) Graph Theory / Cycle Detection
 def test_negative_weight_cycle_detection_returns_closed_cycle() -> None:
     graph = Graph()
     graph.add_edge('A', 'B', 1)
@@ -94,8 +93,8 @@ def test_negative_weight_cycle_detection_returns_closed_cycle() -> None:
     assert cycles[0][0] == cycles[0][-1]
 
 
-# 6) Trees & BSTs analogue in this project = Trie prefix tree
-# 7) Data Structures Arrays & Linked Lists are not implemented as standalone modules;
+# 5) Trees & BSTs analogue in this project = Trie prefix tree
+# 6) Data Structures Arrays & Linked Lists are not implemented as standalone modules;
 #    storage-backed behavior is validated through adjacency lists and chained buckets.
 def test_trie_autocomplete_returns_sorted_prefix_matches() -> None:
     trie = Trie()
@@ -106,7 +105,7 @@ def test_trie_autocomplete_returns_sorted_prefix_matches() -> None:
     assert trie.autocomplete('x') == []
 
 
-# 8) Stacks & Queues / Priority Queues & Heaps
+# 7) Stacks & Queues / Priority Queues & Heaps
 def test_max_heap_dispatches_highest_priority_first() -> None:
     queue = MaxHeap()
     queue.enqueue(Package('PKG002', 5, 'ZoneSouth', 10.0))
@@ -117,7 +116,7 @@ def test_max_heap_dispatches_highest_priority_first() -> None:
     assert queue.is_empty() is True
 
 
-# 9) Priority Queues & Heaps
+# 8) Priority Queues & Heaps
 def test_min_heap_pops_in_non_decreasing_priority_order() -> None:
     heap = MinHeap[str]()
     heap.push(5, 'ZoneSouth')
@@ -132,8 +131,8 @@ def test_min_heap_pops_in_non_decreasing_priority_order() -> None:
     ]
 
 
-# 10) Hash Tables & Collisions
-# 11) Hashing & Hash Tables
+# 9) Hash Tables & Collisions
+# 10) Hashing & Hash Tables
 def test_hash_map_handles_collisions_with_separate_chaining() -> None:
     table = HashMap(capacity=8)
     key1, key2 = 'a', 'i'  # same bucket under current polynomial hash mod 8
@@ -147,7 +146,7 @@ def test_hash_map_handles_collisions_with_separate_chaining() -> None:
     assert table.search(key2) is not None
 
 
-# 12) Hash Tables / Resize
+# 11) Hash Tables / Resize
 def test_hash_map_resizes_and_preserves_values() -> None:
     table = HashMap(capacity=8)
     for i in range(7):
@@ -157,7 +156,7 @@ def test_hash_map_resizes_and_preserves_values() -> None:
         assert table.search(f'Depot{i}') == i
 
 
-# 13) Sorting Algorithms via ordered output contracts in trie and MST
+# 12) Sorting Algorithms via ordered output contracts in trie and MST
 #     There is no standalone sorting module, but sorted behavior is part of the implementation.
 def test_mst_returns_minimum_spanning_forest_edges_in_weight_order(sample_graph: Graph) -> None:
     mst = sample_graph.minimum_spanning_tree_undirected()
@@ -173,14 +172,14 @@ def test_mst_returns_minimum_spanning_forest_edges_in_weight_order(sample_graph:
     ] or mst['total_weight'] == 12.0
 
 
-# 14) Dynamic Programming / APSP
+# 13) Dynamic Programming / APSP
 def test_all_pairs_shortest_paths_memoized_reconstructs_paths(sample_graph: Graph) -> None:
     apsp = sample_graph.all_pairs_shortest_paths_memoized()
     assert apsp['distance_matrix']['DepotA']['ZoneNorth'] == 8.0
     assert apsp['paths']['DepotA']['ZoneNorth'] == ['DepotA', 'WarehouseX', 'ZoneSouth', 'DepotC', 'ZoneNorth']
 
 
-# 15) Structured file loading integration
+# 14) Structured file loading integration
 def test_load_network_file_populates_graph_and_dispatch_queue(tmp_path: Path, sectioned_network_text: str) -> None:
     file_path = tmp_path / 'network.txt'
     file_path.write_text(sectioned_network_text, encoding='utf-8')
@@ -193,7 +192,7 @@ def test_load_network_file_populates_graph_and_dispatch_queue(tmp_path: Path, se
     assert queue.peek().package_id == 'PKG003'
 
 
-# 16) High-level system orchestration
+# 15) High-level system orchestration
 def test_snle_system_loads_network_and_supports_autocomplete_dispatch(tmp_path: Path, sectioned_network_text: str) -> None:
     file_path = tmp_path / 'network.txt'
     file_path.write_text(sectioned_network_text, encoding='utf-8')
@@ -207,7 +206,7 @@ def test_snle_system_loads_network_and_supports_autocomplete_dispatch(tmp_path: 
     assert len(system.dispatch_log) == 1
 
 
-# 17) Depot metadata lifecycle
+# 16) Depot metadata lifecycle
 #     Self-balancing trees are not present in this codebase; depot lookup is implemented with a hash table.
 def test_depot_insert_search_delete_lifecycle() -> None:
     system = SNLESystem()
@@ -218,7 +217,7 @@ def test_depot_insert_search_delete_lifecycle() -> None:
     assert system.search_depot('DepotAlpha') is None
 
 
-# 18) Error handling on invalid package destination
+# 17) Error handling on invalid package destination
 #     Useful coverage for utils module.
 def test_load_network_file_rejects_unknown_package_destination(tmp_path: Path) -> None:
     bad_text = """
