@@ -18,11 +18,8 @@ SNLE is a command-line logistics simulator that models a city delivery network a
 - ASCII graph view and matplotlib visualization
 
 ## How to Run
-From the project root:
+From the project root: python src/main.py
 
-```bash
-python src/main.py
-```
 
 ## CLI Menu
 When launched, `src/main.py` opens the required interactive menu:
@@ -36,12 +33,6 @@ When launched, `src/main.py` opens the required interactive menu:
 6. Autocomplete Depot Name
 7. Exit
 ```
-
-## Running Tests
-```bash
-python -m unittest discover -s tests -v
-```
-
 ## Complexity Summary
 - Graph construction: `O(V + E)`
 - Dijkstra with custom min-heap: `O((V + E) log V)`
